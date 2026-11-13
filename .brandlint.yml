@@ -1,0 +1,4 @@
+# Which files hold copy, and how to read them.
+channels:
+  - glob: "docs/**/*.md"
+    channel: blog
