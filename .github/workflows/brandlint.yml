@@ -1,0 +1,23 @@
+name: BrandLint
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: brandlint-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  BrandLint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the base commit has to be there, to find what changed
+      - uses: AnoushkaSundar/brandlint/integrations/github-action@ef21fd32fff21a7d881e45c56f8f77346b866098
+        with:
+          server: https://139.59.2.191.sslip.io/api
+          token: ${{ secrets.BRANDLINT_TOKEN }}
